@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 import tkinter as tk
 from tkinter import ttk, messagebox
 
@@ -92,7 +93,8 @@ class KMApp(tk.Tk):
                 raise ValueError(f"Invalid email account row: {row}")
             accounts.append(EmailAccount(address=parts[0], password=parts[1], imap_server=parts[2]))
 
-        return AppConfig(
+        return replace(
+            self.config_data,
             owner_whatsapp_number=self.owner_whatsapp.get().strip(),
             twilio_from_whatsapp=self.twilio_from.get().strip(),
             twilio_sid=self.twilio_sid.get().strip(),
